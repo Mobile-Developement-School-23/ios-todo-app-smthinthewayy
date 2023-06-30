@@ -42,7 +42,7 @@ class TaskDetailsView: UIView {
     static let scrollViewLeadingPadding: CGFloat = 16
     static let scrollViewTrailingPadding: CGFloat = -16
     static let scrollViewBottomPadding: CGFloat = 16
-    static let scrollViewContentLayoutGuideHeightPadding = 66.5
+    static let scrollViewCLGHeightPadding = 66.5
 
     static let stackViewTopPading: CGFloat = 16
     static let stackViewHeight: CGFloat = 352.5
@@ -163,28 +163,31 @@ class TaskDetailsView: UIView {
       scrollView.topAnchor.constraint(equalTo: topAnchor),
       scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-      scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.scrollViewBottomPadding),
+      scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.scrollViewBottomPadding)
     ])
   }
 
   private func setupStackView() {
     scrollView.addSubview(stackView)
     NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: Constants.stackViewTopPading),
+      stackView.topAnchor.constraint(
+        equalTo: scrollView.contentLayoutGuide.topAnchor,
+        constant: Constants.stackViewTopPading
+      ),
       stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
       stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
       scrollView.contentLayoutGuide.widthAnchor.constraint(equalTo: stackView.widthAnchor),
       scrollView.contentLayoutGuide.heightAnchor.constraint(
         equalTo: stackView.heightAnchor,
-        constant: 16 + Constants.deleteButtonHeight + Constants.scrollViewContentLayoutGuideHeightPadding
-      ),
+        constant: 16 + Constants.deleteButtonHeight + Constants.scrollViewCLGHeightPadding
+      )
     ])
   }
 
   private func setupTaskDescriptionTextView() {
     stackView.addArrangedSubview(taskDescriptionTextView)
     NSLayoutConstraint.activate([
-      taskDescriptionTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: Constants.textViewHeight),
+      taskDescriptionTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: Constants.textViewHeight)
     ])
   }
 
@@ -192,7 +195,7 @@ class TaskDetailsView: UIView {
     stackView.addArrangedSubview(parametersView)
     NSLayoutConstraint.activate([
       parametersView.heightAnchor.constraint(greaterThanOrEqualToConstant: 112.5),
-      parametersView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+      parametersView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
     ])
   }
 
@@ -202,7 +205,7 @@ class TaskDetailsView: UIView {
       deleteButton.topAnchor.constraint(equalTo: parametersView.bottomAnchor, constant: 16),
       deleteButton.leadingAnchor.constraint(equalTo: parametersView.leadingAnchor),
       deleteButton.trailingAnchor.constraint(equalTo: parametersView.trailingAnchor),
-      deleteButton.heightAnchor.constraint(equalToConstant: 56),
+      deleteButton.heightAnchor.constraint(equalToConstant: 56)
     ])
   }
 }

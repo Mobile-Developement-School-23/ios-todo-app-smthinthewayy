@@ -128,8 +128,10 @@ class ParametersView: UIStackView {
   }()
 
   lazy var importancePicker: UISegmentedControl = {
-    let segmentedControl = UISegmentedControl(items: [Images.image(for: .lowImportance).withRenderingMode(.alwaysOriginal), "нет",
-                                                      Images.image(for: .highImportance).withRenderingMode(.alwaysOriginal)])
+    let segmentedControl =
+      UISegmentedControl(items: [Images.image(for: .lowImportance).withRenderingMode(.alwaysOriginal), "нет",
+                                 Images.image(for: .highImportance)
+                                   .withRenderingMode(.alwaysOriginal)])
     segmentedControl.selectedSegmentIndex = 2
     segmentedControl.backgroundColor = Colors.color(for: .supportOverlay)
     segmentedControl.selectedSegmentTintColor = Colors.color(for: .backElevated)
@@ -183,7 +185,7 @@ class ParametersView: UIStackView {
     NSLayoutConstraint.activate([
       importanceLabel.heightAnchor.constraint(equalToConstant: 36),
       importanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.importanceLabelLeftPadding),
-      importanceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+      importanceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10)
     ])
   }
 
@@ -193,7 +195,10 @@ class ParametersView: UIStackView {
       importancePicker.widthAnchor.constraint(equalToConstant: Constants.importancePickerWidth),
       importancePicker.heightAnchor.constraint(equalToConstant: Constants.importancePickerHeight),
       importancePicker.topAnchor.constraint(equalTo: topAnchor, constant: Constants.importancePickerTopPadding),
-      importancePicker.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.importancePickerRightPadding),
+      importancePicker.trailingAnchor.constraint(
+        equalTo: trailingAnchor,
+        constant: Constants.importancePickerRightPadding
+      )
     ])
   }
 
@@ -214,7 +219,7 @@ class ParametersView: UIStackView {
       deadlineStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
       deadlineStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -80),
       deadlineStackView.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 9),
-      deadlineStackView.heightAnchor.constraint(equalToConstant: 40),
+      deadlineStackView.heightAnchor.constraint(equalToConstant: 40)
     ])
     setupDoneByLabel()
     setupDeadlineDateLabel()
@@ -227,7 +232,7 @@ class ParametersView: UIStackView {
   private func setupDeadlineDateLabel() {
     deadlineStackView.addArrangedSubview(deadlineDateButton)
     NSLayoutConstraint.activate([
-      deadlineDateButton.bottomAnchor.constraint(equalTo: deadlineStackView.bottomAnchor),
+      deadlineDateButton.bottomAnchor.constraint(equalTo: deadlineStackView.bottomAnchor)
     ])
   }
 
@@ -237,16 +242,12 @@ class ParametersView: UIStackView {
       deadlineSwitch.widthAnchor.constraint(equalToConstant: Constants.deadlineSwitchWidth),
       deadlineSwitch.heightAnchor.constraint(equalToConstant: Constants.deadlineSwitchHeight),
       deadlineSwitch.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 13.5),
-      deadlineSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+      deadlineSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
     ])
   }
 
   private func setupHiddenDividerView() {
     addArrangedSubview(hiddenDividerView)
-//    NSLayoutConstraint.activate([
-//      hiddenDividerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.dividerViewLeftPadding),
-//      hiddenDividerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.dividerViewRightPadding),
-//    ])
   }
 
   private func setupCalendarView() {
@@ -254,7 +255,7 @@ class ParametersView: UIStackView {
     let selection = UICalendarSelectionSingleDate(delegate: self)
     calendarView.selectionBehavior = selection
     NSLayoutConstraint.activate([
-      calendarView.widthAnchor.constraint(equalToConstant: 311),
+      calendarView.widthAnchor.constraint(equalToConstant: 311)
     ])
   }
 

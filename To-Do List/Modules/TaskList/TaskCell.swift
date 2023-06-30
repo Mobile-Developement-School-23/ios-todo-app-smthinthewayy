@@ -118,7 +118,7 @@ class TaskCell: UITableViewCell {
     contentView.addSubview(chevron)
     NSLayoutConstraint.activate([
       chevron.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      chevron.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      chevron.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
     ])
   }
 
@@ -126,7 +126,7 @@ class TaskCell: UITableViewCell {
     contentView.addSubview(statusButton)
     NSLayoutConstraint.activate([
       statusButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+      statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
     ])
   }
 
@@ -137,7 +137,7 @@ class TaskCell: UITableViewCell {
       taskStackView.leadingAnchor.constraint(equalTo: statusButton.trailingAnchor, constant: 12),
       taskStackView.trailingAnchor.constraint(equalTo: chevron.leadingAnchor, constant: -16),
       taskStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-      taskStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 24),
+      taskStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 24)
     ])
     taskStackView.addArrangedSubview(titleStackView)
   }
@@ -170,7 +170,11 @@ class TaskCell: UITableViewCell {
     if task.isDone {
       statusButton.setImage(Images.image(for: .RBon), for: .normal)
       let attributeString = NSMutableAttributedString(string: task.text)
-      attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSMakeRange(0, attributeString.length))
+      attributeString.addAttribute(
+        NSAttributedString.Key.strikethroughStyle,
+        value: 1,
+        range: NSRange(location: 0, length: attributeString.length)
+      )
       titleLabel.textColor = Colors.color(for: .labelTertiary)
       titleLabel.attributedText = attributeString
       titleStackView.addArrangedSubview(titleLabel)
@@ -188,7 +192,10 @@ class TaskCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     statusButton.setImage(Images.image(for: .RBoff), for: .normal)
-    attributeString.removeAttribute(NSAttributedString.Key.strikethroughStyle, range: NSMakeRange(0, attributeString.length))
+    attributeString.removeAttribute(
+      NSAttributedString.Key.strikethroughStyle,
+      range: NSRange(location: 0, length: attributeString.length)
+    )
     titleLabel.textColor = Colors.color(for: .labelPrimary)
     titleLabel.attributedText = nil
     deadlineStackView.removeArrangedSubview(deadlineLabel)

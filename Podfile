@@ -6,7 +6,7 @@ target 'To-Do List' do
   use_frameworks!
 
   # Pods for To-Do List
-  pod 'Reveal-SDK', configurations: ['Debug']
+  pod 'SwiftLint'
 
 end
 

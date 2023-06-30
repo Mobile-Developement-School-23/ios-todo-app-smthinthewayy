@@ -63,7 +63,7 @@ class TaskListVC: UIViewController {
       tasksList.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       tasksList.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       tasksList.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      tasksList.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      tasksList.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
   }
 
@@ -86,7 +86,7 @@ class TaskListVC: UIViewController {
     view.addSubview(addButton)
     NSLayoutConstraint.activate([
       addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+      addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25)
     ])
   }
 
@@ -156,9 +156,15 @@ extension TaskListVC: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as? TaskCell
+    guard let cell = tableView.dequeueReusableCell(
+      withIdentifier: Constants.cellIdentifier,
+      for: indexPath
+    ) as? TaskCell
     else { return UITableViewCell() }
-    guard let newCell = tableView.dequeueReusableCell(withIdentifier: Constants.newCellIdentifier, for: indexPath) as? NewTaskCell
+    guard let newCell = tableView.dequeueReusableCell(
+      withIdentifier: Constants.newCellIdentifier,
+      for: indexPath
+    ) as? NewTaskCell
     else { return UITableViewCell() }
 
     cell.delegate = self
@@ -205,7 +211,8 @@ extension TaskListVC: UITableViewDelegate {
     return tasksListHeaderView
   }
 
-  func tableView(_: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+  func tableView(_: UITableView,
+                 leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     guard !showingTasks.isEmpty else {
       return nil
     }
@@ -226,7 +233,8 @@ extension TaskListVC: UITableViewDelegate {
     return UISwipeActionsConfiguration(actions: [action])
   }
 
-  func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+  func tableView(_: UITableView,
+                 trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     guard !showingTasks.isEmpty else {
       return nil
     }
@@ -266,13 +274,13 @@ extension TaskListVC: UITableViewDelegate {
 
 extension TaskListVC: TaskDetailsVCDelegate {
   func deleteTask(_ id: String) {
-    let _ = fileCache.delete(id)
+    _ = fileCache.delete(id)
     fileCache.saveToJSON(to: "tasks") { _ in }
     setupShowingTasks()
   }
 
   func saveTask(_ task: Task) {
-    let _ = fileCache.add(task)
+    _ = fileCache.add(task)
     fileCache.saveToJSON(to: "tasks") { _ in }
     setupShowingTasks()
   }

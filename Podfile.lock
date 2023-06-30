@@ -1,16 +1,16 @@
 PODS:
-  - Reveal-SDK (41)
+  - SwiftLint (0.52.2)
 
 DEPENDENCIES:
-  - Reveal-SDK
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
-    - Reveal-SDK
+    - SwiftLint
 
 SPEC CHECKSUMS:
-  Reveal-SDK: c33a66072cd9ac5f3e6fb94984743ab5f3057d28
+  SwiftLint: 1ac76dac888ca05cb0cf24d0c85887ec1209961d
 
-PODFILE CHECKSUM: 31022d80d71aca76fac4493a856045e5534dbacb
+PODFILE CHECKSUM: 00b1b2b4cb36c2307292a351e7dbdf570af70106
 
 COCOAPODS: 1.11.3

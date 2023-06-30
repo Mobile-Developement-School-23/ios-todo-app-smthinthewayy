@@ -130,8 +130,8 @@ class FileCache {
 
       var deserializedtasks = [Task]()
 
-      for i in 1 ..< rows.count {
-        deserializedtasks.append(Task.parse(csv: String(rows[i]))!)
+      for row in 1 ..< rows.count {
+        deserializedtasks.append(Task.parse(csv: String(rows[row]))!)
       }
 
       tasks = deserializedtasks
