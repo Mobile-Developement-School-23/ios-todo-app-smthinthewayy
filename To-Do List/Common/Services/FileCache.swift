@@ -5,6 +5,7 @@
 //  Created by Danila Belyi on 11.06.2023.
 //
 
+import CocoaLumberjackSwift
 import Foundation
 
 // MARK: - FileCache
@@ -37,6 +38,7 @@ class FileCache {
     DispatchQueue.global(qos: .userInitiated).async {
       do {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+          DDLogDebug("directoryNotFound")
           throw FileCacheErrors.directoryNotFound
         }
 
@@ -44,6 +46,7 @@ class FileCache {
         let serializedtasks = self.tasks.map { $0.json }
         let data = try JSONSerialization.data(withJSONObject: serializedtasks)
         try data.write(to: path)
+        DDLogDebug("successfully saving data to a file")
 
         DispatchQueue.main.async {
           completion(nil)
@@ -60,6 +63,7 @@ class FileCache {
     DispatchQueue.global(qos: .userInitiated).async {
       do {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+          DDLogDebug("directoryNotFound")
           throw FileCacheErrors.directoryNotFound
         }
 
@@ -70,6 +74,7 @@ class FileCache {
 
         let data = serializedtasks.joined(separator: "\n").data(using: .utf8)!
         try data.write(to: path, options: .atomic)
+        DDLogDebug("successfully saving data to a file")
 
         DispatchQueue.main.async {
           completion(nil)
@@ -85,6 +90,7 @@ class FileCache {
   func loadFromJSON(from file: String, completion: @escaping (Error?) -> Void) {
     do {
       guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        DDLogDebug("directoryNotFound")
         throw FileCacheErrors.directoryNotFound
       }
 
@@ -96,8 +102,10 @@ class FileCache {
         throw FileCacheErrors.invalidData
       }
 
-      let deserializedtasks = json.compactMap { Task.parse(json: $0) }.sorted { $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970 }
+      let deserializedtasks = json.compactMap { Task.parse(json: $0) }
+        .sorted { $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970 }
       tasks = deserializedtasks
+      DDLogDebug("successfully reading data from a file")
 
       DispatchQueue.main.async {
         completion(nil)
@@ -112,6 +120,7 @@ class FileCache {
   func loadFromCSV(from file: String, completion: @escaping (Error?) -> Void) {
     do {
       guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        DDLogDebug("directoryNotFound")
         throw FileCacheErrors.directoryNotFound
       }
 
@@ -126,6 +135,7 @@ class FileCache {
       }
 
       tasks = deserializedtasks
+      DDLogDebug("successfully reading data from a file")
 
       DispatchQueue.main.async {
         completion(nil)
